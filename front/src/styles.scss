@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/normalize.css/normalize.css";
 
-
 a {
   text-decoration: inherit;
   color: inherit;
@@ -13,6 +12,7 @@ button {
 
   &:not(:disabled) {
     cursor: pointer;
+
     &:hover {
       border-color: #ddd;
       background: #ddd;
@@ -22,5 +22,22 @@ button {
       border-color: #ccc;
       background: #ccc;
     }
+  }
+
+  &.primary:not(:disabled) {
+    border-color: #333;
+    background: #333;
+    color: white;
+
+    &:hover {
+      border-color: #444;
+      background: #444;
+    }
+
+    &:active {
+      border-color: #555;
+      background: #555;
+    }
+
   }
 }
