@@ -1,0 +1,14 @@
+header {
+  background: #eee;
+  height: 3em;
+
+  a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 0.5em;
+    span {
+      padding-left: 0.5em;
+    }
+  }
+}
