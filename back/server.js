@@ -9,6 +9,8 @@ const dbName = 'lavalstore';
 
 const client = new MongoClient(url, { useUnifiedTopology: true });
 
+let db;
+
 client.connect(err => {
     if (err) {
         console.log('Cannot connect to DB...');
@@ -16,7 +18,7 @@ client.connect(err => {
     }
     console.log("Connected successfully to server");
 
-    const db = client.db(dbName);
+    db = client.db(dbName);
 
 });
 
@@ -35,9 +37,12 @@ app.get('/ws/reference', (req, res, next) => {
     res.json({ toto: 345, titi: "pelle" });
 });
 
-app.post('/ws/reference', (req, res, next) => {
+app.post('/ws/reference', async (req, res, next) => {
     references.push(req.body);
     fs.writeFileSync('references.json', JSON.stringify(references));
+
+    await db.collection('reference').insertOne(req.body);
+
     res.status(204).end();
 });
 
