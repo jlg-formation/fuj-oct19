@@ -2,28 +2,19 @@ const express = require('express');
 const serveIndex = require('serve-index');
 const cors = require('cors');
 const fs = require('fs');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
-const url = 'mongodb://localhost:27017';
-const dbName = 'lavalstore';
+mongoose.connect('mongodb://localhost:27017/lavalstore', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('MongoDB ok.'));
 
-const client = new MongoClient(url, { useUnifiedTopology: true });
-
-let db;
-
-client.connect(err => {
-    if (err) {
-        console.log('Cannot connect to DB...');
-        return;
-    }
-    console.log("Connected successfully to server");
-
-    db = client.db(dbName);
-
+const Reference = mongoose.model('Reference', {
+    label: { type: String, required: true, unique: true },
+    category: String,
+    quantity: String,
+    price: String,
 });
-
-
-
 
 const app = express();
 const port = 3000;
@@ -38,12 +29,23 @@ app.get('/ws/reference', (req, res, next) => {
 });
 
 app.post('/ws/reference', async (req, res, next) => {
-    references.push(req.body);
-    fs.writeFileSync('references.json', JSON.stringify(references));
+    try {
+        references.push(req.body);
+        fs.writeFileSync('references.json', JSON.stringify(references));
 
-    await db.collection('reference').insertOne(req.body);
+        try {
+            const ref = new Reference(req.body);
+            await ref.save();
+    
+        } catch (err) {
+            res.status(400).json(err);
+        }
+        
+        res.status(204).end();
+    } catch (err) {
+        res.status(500).end();
+    }
 
-    res.status(204).end();
 });
 
 app.use(express.static('.'));
