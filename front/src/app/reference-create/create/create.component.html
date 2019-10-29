@@ -2,7 +2,7 @@
   <h1>Entrer une nouvelle référence</h1>
   <form>
     <label>
-      <div>Libellé</div>
+      <div>Libellé*</div>
       <input type="text">
     </label>
     <label>
@@ -10,16 +10,19 @@
       <input type="text">
     </label>
     <label>
-      <div>Quantité</div>
+      <div>Quantité*</div>
       <input type="text">
     </label>
     <label>
       <div>Prix achat</div>
       <input type="text">
     </label>
+    <div class="small">(*): champs obligatoires</div>
+
     <div class="buttons">
       <button routerLink="/">Annuler</button>
       <button class="primary" routerLink="/reference/succes">Ajouter</button>
     </div>
+
   </form>
 </main>
