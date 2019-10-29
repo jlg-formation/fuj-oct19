@@ -20,4 +20,8 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit() {
+    console.log('submit');
+  }
+
 }
