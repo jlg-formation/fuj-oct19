@@ -1,27 +1,27 @@
 <main>
   <h1>Entrer une nouvelle référence</h1>
-  <form>
+  <form [formGroup]="f">
     <label>
       <div>Libellé*</div>
-      <input type="text">
+      <input type="text" formControlName="label">
     </label>
     <label>
-      <div>Catégorie</div>
-      <input type="text">
+      <div>Catégorie*</div>
+      <input type="text" formControlName="category">
     </label>
     <label>
       <div>Quantité*</div>
-      <input type="text">
+      <input type="text" formControlName="quantity">
     </label>
     <label>
       <div>Prix achat</div>
-      <input type="text">
+      <input type="text" formControlName="price">
     </label>
     <div class="small">(*): champs obligatoires</div>
 
     <div class="buttons">
       <button routerLink="/">Annuler</button>
-      <button class="primary" routerLink="/reference/succes">Ajouter</button>
+      <button class="primary" [disabled]="f.invalid" routerLink="/reference/succes">Ajouter</button>
     </div>
 
   </form>
