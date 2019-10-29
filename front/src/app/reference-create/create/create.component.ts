@@ -12,9 +12,9 @@ import { Reference } from 'src/app/interface/reference';
 export class CreateComponent implements OnInit {
 
   f = new FormGroup({
-    label: new FormControl('', Validators.required),
-    category: new FormControl('', Validators.required),
-    quantity: new FormControl('', Validators.required),
+    label: new FormControl('Pelle', Validators.required),
+    category: new FormControl('Outils', Validators.required),
+    quantity: new FormControl('34', Validators.required),
     price: new FormControl(''),
   });
 
