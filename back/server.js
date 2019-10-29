@@ -2,6 +2,25 @@ const express = require('express');
 const serveIndex = require('serve-index');
 const cors = require('cors');
 const fs = require('fs');
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://localhost:27017';
+const dbName = 'lavalstore';
+
+const client = new MongoClient(url, { useUnifiedTopology: true });
+
+client.connect(err => {
+    if (err) {
+        console.log('Cannot connect to DB...');
+        return;
+    }
+    console.log("Connected successfully to server");
+
+    const db = client.db(dbName);
+
+});
+
+
 
 
 const app = express();
