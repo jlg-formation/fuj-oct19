@@ -10,12 +10,12 @@ export class ReferenceService {
 
   constructor() { }
 
-  add(ref: Reference) {
+  async add(ref: Reference) {
     this.ref = ref;
-    this.save();
+    await this.save();
   }
 
-  save() {
+  async save() {
     localStorage.setItem('currentRef', JSON.stringify(this.ref));
   }
 }

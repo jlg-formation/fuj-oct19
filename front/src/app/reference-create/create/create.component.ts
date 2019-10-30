@@ -26,10 +26,14 @@ export class CreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit() {
+  async submit() {
     console.log('submit');
-    this.reference.add(this.f.value as Reference);
-    this.router.navigateByUrl('/reference/succes');
+    try {
+      await this.reference.add(this.f.value as Reference);
+      this.router.navigateByUrl('/reference/succes');
+    } catch (err) {
+      this.router.navigateByUrl('/error');
+    }
   }
 
 }

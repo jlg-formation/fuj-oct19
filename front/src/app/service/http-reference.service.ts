@@ -12,14 +12,10 @@ export class HttpReferenceService extends ReferenceService {
     super();
   }
 
-  save() {
-    super.save();
-    this.http.post('http://localhost:3000/ws/reference', this.ref).subscribe(
-      data => {
-        console.log('reference created on back office with success');
-      },
-      err => console.error('error', err)
-    );
+  async save() {
+    await super.save();
+    const data = await this.http.post('http://localhost:3000/ws/reference', this.ref).toPromise();
+    console.log('reference created on back office with success');
   }
 
 }
