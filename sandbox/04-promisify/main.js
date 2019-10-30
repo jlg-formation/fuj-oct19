@@ -13,9 +13,6 @@ function coucouSlow(str, callback) {
     }, 500);
 }
 
-
-
-
 const promisify = asyncFn => (...c) => new Promise((a, b) => asyncFn(...c, (e, ...r) => e ? b(e) : a(...r)));
 
 const coucouSlowPromise = promisify(coucouSlow);
