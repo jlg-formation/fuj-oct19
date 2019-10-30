@@ -3,20 +3,18 @@ const serveIndex = require('serve-index');
 const cors = require('cors');
 const fs = require('fs').promises;
 const mongoose = require('mongoose');
+const Reference = require('./model/Reference');
+
+
 
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
 
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb://localhost:27017/lavalstore', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => console.log('MongoDB ok.'));
 
-const Reference = mongoose.model('Reference', {
-    label: { type: String, required: true, unique: true },
-    category: String,
-    quantity: String,
-    price: String,
-});
 
 const app = express();
 const port = 3000;
