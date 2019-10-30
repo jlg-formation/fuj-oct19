@@ -25,30 +25,23 @@ app.use(async (req, res, next) => {
     next();
 });
 
-const references = [];
-
-app.get('/ws/reference', (req, res, next) => {
-    res.json({ toto: 345, titi: "pelle" });
+app.get('/ws/reference', async (req, res, next) => {
+    try {
+        const references = await Reference.find();
+        res.json(references.map(d => d.toObject()));
+    } catch (err) {
+        res.status(500).end();
+    }
 });
 
 app.post('/ws/reference', async (req, res, next) => {
     try {
-        references.push(req.body);
-        await fs.writeFile('references.json', JSON.stringify(references));
-
-        try {
-            const ref = new Reference(req.body);
-            await ref.save();
-
-        } catch (err) {
-            res.status(400).json(err);
-        }
-
+        const ref = new Reference(req.body);
+        await ref.save();
         res.status(204).end();
     } catch (err) {
-        res.status(500).end();
+        res.status(400).json(err);
     }
-
 });
 
 app.use(express.static('.'));

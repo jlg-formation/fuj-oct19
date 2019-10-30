@@ -8,23 +8,19 @@ import { Stock } from '../interface/stock';
 export class ReferenceService {
 
   ref = this.getCurrentRef();
-  stock: Stock;
+  stock = this.getStock();
 
-  constructor() {
-    (async () => {
-      this.stock = await this.getStock();
-    })();
-  }
+  constructor() { }
 
   async add(ref: Reference) {
     this.ref = ref;
     this.stock[this.ref.label] = this.ref;
-    await this.save();
+    this.saveCurrentRef();
+    this.saveStock();
   }
 
-  async save() {
+  saveCurrentRef() {
     localStorage.setItem('currentRef', JSON.stringify(this.ref));
-    localStorage.setItem('stock', JSON.stringify(this.stock));
   }
 
   getCurrentRef(): Reference {
@@ -35,12 +31,16 @@ export class ReferenceService {
     return JSON.parse(str) as Reference;
   }
 
-  async getStock(): Promise<Stock> {
+  getStock() {
     const str = localStorage.getItem('stock');
     if (!str) {
       return {};
     }
     return JSON.parse(str) as Stock;
+  }
+
+  saveStock() {
+    localStorage.setItem('stock', JSON.stringify(this.stock));
   }
 
   hasStock() {
