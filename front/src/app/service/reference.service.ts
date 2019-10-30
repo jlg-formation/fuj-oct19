@@ -61,4 +61,8 @@ export class ReferenceService {
     this.stock[this.ref.label] = this.ref;
     this.saveStock();
   }
+
+  async refresh() {
+    // nothing to do.
+  }
 }

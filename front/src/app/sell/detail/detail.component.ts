@@ -12,6 +12,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class DetailComponent implements OnInit {
 
   ref: Reference;
+  currentQty: number;
 
   f = new FormGroup({
     qty: new FormControl('1', Validators.required),
@@ -24,7 +25,9 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(async params => {
+      this.reference.refresh();
       this.ref = this.reference.stock[params.label];
+      this.currentQty = +this.ref.quantity;
       this.reference.setCurrentRef(this.ref);
     });
   }

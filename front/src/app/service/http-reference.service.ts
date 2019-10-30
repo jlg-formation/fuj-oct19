@@ -42,4 +42,9 @@ export class HttpReferenceService extends ReferenceService {
     console.log('successfully delivered on http');
   }
 
+  async refresh() {
+    super.refresh();
+    this.getStockFromServer();
+  }
+
 }
