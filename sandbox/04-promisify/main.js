@@ -18,15 +18,11 @@ function coucouSlow(str, callback) {
 
 const promisify = asyncFn =>
     (...args) =>
-        new Promise((resolve, reject) => {
-            asyncFn(...args, (err, ...results) => {
-                if (err)
-                    return reject(err);
-
-
-                resolve(...results);
-            });
-        });
+        new Promise((resolve, reject) =>
+            asyncFn(...args, (err, ...results) =>
+                (err) ? reject(err) : resolve(...results)
+            )
+        );
 
 const coucouSlowPromise = promisify(coucouSlow);
 
