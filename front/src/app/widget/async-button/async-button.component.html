@@ -1,0 +1,7 @@
+<ng-content *ngIf="state === 'ready'"></ng-content>
+<div #buttonTrace class="button-trace" *ngIf="state === 'progress'">
+  <div #bigBar class="big-bar">
+    <div #progressBar class="progress-bar"></div>
+  </div>
+</div>
+<button #submitButton type="submit" class="invisible">toto</button>

@@ -21,7 +21,9 @@
 
     <div class="buttons">
       <button type="button" routerLink="/">Annuler</button>
-      <button type="submit" class="primary" [disabled]="f.invalid">Ajouter</button>
+      <app-async-button>
+        <button #asyncBtn type="submit" class="primary" [disabled]="f.invalid">Ajouter</button>
+      </app-async-button>
     </div>
 
   </form>

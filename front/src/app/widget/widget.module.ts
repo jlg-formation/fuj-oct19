@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutofocusDirective } from './autofocus.directive';
+import { AsyncButtonComponent } from './async-button/async-button.component';
 
 @NgModule({
-  declarations: [AutofocusDirective],
+  declarations: [AutofocusDirective, AsyncButtonComponent],
   imports: [
     CommonModule
   ],
-  exports: [AutofocusDirective]
+  exports: [AutofocusDirective, AsyncButtonComponent]
 })
 export class WidgetModule { }

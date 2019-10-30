@@ -1,0 +1,33 @@
+.button-trace {
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+.big-bar {
+  width: 100%;
+  height: 100%;
+  background: #ccc;
+  transition: height 300ms;
+}
+
+.progress-bar {
+  background: #333;
+  width: 0%;
+  height: 100%;
+  transition: width 5s;
+}
+
+.start {
+  .big-bar {
+    height: 50%;
+  }
+
+  .progress-bar {
+    width: 90%;
+  }
+}
+
+.invisible {
+  display: none;
+}
