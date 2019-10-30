@@ -17,8 +17,8 @@ function coucouSlow(str, callback) {
 
 
 const promisify = asyncFn =>
-    (...args) => {
-        return new Promise((resolve, reject) => {
+    (...args) =>
+        new Promise((resolve, reject) => {
             asyncFn(...args, (err, ...results) => {
                 if (err) {
                     reject(err);
@@ -27,7 +27,6 @@ const promisify = asyncFn =>
                 resolve(...results);
             });
         });
-    };
 
 const coucouSlowPromise = promisify(coucouSlow);
 
