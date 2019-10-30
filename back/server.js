@@ -5,8 +5,6 @@ const fs = require('fs').promises;
 const mongoose = require('mongoose');
 const Reference = require('./model/Reference');
 
-
-
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
 
 mongoose.set('useCreateIndex', true);
