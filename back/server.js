@@ -44,6 +44,24 @@ app.post('/ws/reference', async (req, res, next) => {
     }
 });
 
+app.put('/ws/reference/:id', async (req, res, next) => {
+    try {
+        const id = mongoose.Types.ObjectId(req.params.id);
+
+        let resource = await Reference.findById(id);
+        if (resource === null) {
+            res.status(404).json({ error: 'Object not found' });
+            return;
+        }
+        await resource.update(req.body, {
+            overwrite: true
+        });
+        res.status(204).end();
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 app.use(express.static('.'));
 app.use(serveIndex('.', { icons: true }));
 
