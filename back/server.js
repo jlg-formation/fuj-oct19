@@ -4,6 +4,8 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const mongoose = require('mongoose');
 
+const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
+
 mongoose.connect('mongodb://localhost:27017/lavalstore', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -22,6 +24,11 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+app.use(async (req, res, next) => {
+    await sleep(2000);
+    next();
+});
+
 const references = [];
 
 app.get('/ws/reference', (req, res, next) => {
@@ -36,11 +43,11 @@ app.post('/ws/reference', async (req, res, next) => {
         try {
             const ref = new Reference(req.body);
             await ref.save();
-    
+
         } catch (err) {
             res.status(400).json(err);
         }
-        
+
         res.status(204).end();
     } catch (err) {
         res.status(500).end();
