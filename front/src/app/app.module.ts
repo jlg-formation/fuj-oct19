@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReferenceService } from './service/reference.service';
 import { HttpReferenceService } from './service/http-reference.service';
 import { ErrorComponent } from './route/error/error.component';
+import { SellModule } from './sell/sell.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ErrorComponent } from './route/error/error.component';
     FontAwesomeModule,
     AppRoutingModule,
     LayoutModule,
-    ReferenceCreateModule
+    ReferenceCreateModule,
+    SellModule
   ],
   providers: [
     { provide: ReferenceService, useClass: HttpReferenceService },
