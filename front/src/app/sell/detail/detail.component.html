@@ -1,1 +1,16 @@
-<p>detail works!</p>
+<main>
+  <h1>{{ref.label}}</h1>
+  <p>Catégorie : {{ref.category}}</p>
+  <p *ngIf="ref.price">Prix unitaire: {{ref.price}}</p>
+  <h2>Quantité en stock : {{ref.quantity}}</h2>
+  <form>
+    <label>
+      Quantité à délivrer
+      <input type="text">
+    </label>
+    <div class="buttons">
+      <button>Annuler</button>
+    <button class="primary">Délivrer</button>
+    </div>
+  </form>
+</main>
