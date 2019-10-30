@@ -7,6 +7,7 @@ import { DetailComponent } from './detail/detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WidgetModule } from '../widget/widget.module';
 import { DeliveredComponent } from './delivered/delivered.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { DeliveredComponent } from './delivered/delivered.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     WidgetModule,
     SellRoutingModule
   ]

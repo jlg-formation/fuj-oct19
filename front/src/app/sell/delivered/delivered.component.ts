@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { ReferenceService } from 'src/app/service/reference.service';
 
 @Component({
   selector: 'app-delivered',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeliveredComponent implements OnInit {
 
-  constructor() { }
+  faThumbsUp = faThumbsUp;
+
+  ref = this.reference.ref;
+
+  constructor(private reference: ReferenceService) { }
 
   ngOnInit() {
+
   }
 
 }
