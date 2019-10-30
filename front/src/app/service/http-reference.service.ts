@@ -36,4 +36,10 @@ export class HttpReferenceService extends ReferenceService {
     }
   }
 
+  async deliver(qty: number) {
+    await super.deliver(qty);
+    await this.http.put(`http://localhost:3000/ws/reference/${this.ref._id}`, this.ref).toPromise();
+    console.log('successfully delivered on http');
+  }
+
 }

@@ -13,10 +13,14 @@ export class ReferenceService {
   constructor() { }
 
   async add(ref: Reference) {
-    this.ref = ref;
+    this.setCurrentRef(ref);
     this.stock[this.ref.label] = this.ref;
-    this.saveCurrentRef();
     this.saveStock();
+  }
+
+  setCurrentRef(ref: Reference) {
+    this.ref = ref;
+    this.saveCurrentRef();
   }
 
   saveCurrentRef() {
@@ -49,5 +53,12 @@ export class ReferenceService {
 
   getStockAsArray() {
     return Object.values(this.stock);
+  }
+
+  async deliver(qty: number) {
+    this.ref.quantity = (+this.ref.quantity - qty) + '';
+    this.saveCurrentRef();
+    this.stock[this.ref.label] = this.ref;
+    this.saveStock();
   }
 }

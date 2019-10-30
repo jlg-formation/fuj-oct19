@@ -3,14 +3,16 @@
   <h2>Quantité en stock : {{ref.quantity}}</h2>
   <p>Catégorie : {{ref.category}}</p>
   <p *ngIf="ref.price">Prix unitaire: {{ref.price}}</p>
-  <form>
+  <form [formGroup]="f" (ngSubmit)="submit()">
     <label>
       Quantité à délivrer
-      <input type="text">
+      <input type="text" formControlName="qty">
     </label>
     <div class="buttons">
       <button>Annuler</button>
-    <button class="primary">Délivrer</button>
+      <app-async-button>
+        <button #asyncBtn type="submit" class="primary">Délivrer</button>
+      </app-async-button>
     </div>
   </form>
 </main>
