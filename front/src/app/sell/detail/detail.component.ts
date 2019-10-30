@@ -25,7 +25,7 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(async params => {
-      this.reference.refresh();
+      await this.reference.refresh();
       this.ref = this.reference.stock[params.label];
       this.currentQty = +this.ref.quantity;
       this.reference.setCurrentRef(this.ref);
@@ -33,9 +33,13 @@ export class DetailComponent implements OnInit {
   }
 
   async submit() {
-    console.log('submit');
-    await this.reference.deliver(+this.f.value.qty);
-    this.router.navigateByUrl('/delivered');
+    try {
+      console.log('submit');
+      await this.reference.deliver(+this.f.value.qty);
+      this.router.navigateByUrl('/delivered');
+    } catch (err) {
+      this.router.navigateByUrl('/error');
+    }
   }
 
 }

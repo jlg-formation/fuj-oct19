@@ -20,6 +20,7 @@ export class HttpReferenceService extends ReferenceService {
     super.add(ref);
     const data = await this.http.post('http://localhost:3000/ws/reference', ref).toPromise();
     console.log('reference created on back office with success');
+    await this.refresh();
   }
 
   async getStockFromServer() {
@@ -39,11 +40,12 @@ export class HttpReferenceService extends ReferenceService {
   async deliver(qty: number) {
     await super.deliver(qty);
     await this.http.put(`http://localhost:3000/ws/reference/${this.ref._id}`, this.ref).toPromise();
+    await this.refresh();
     console.log('successfully delivered on http');
   }
 
   async refresh() {
-    super.refresh();
+    await super.refresh();
     this.getStockFromServer();
   }
 
