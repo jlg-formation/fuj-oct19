@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,16 +11,19 @@ import { ReferenceCreateModule } from './reference-create/reference-create.modul
 import { HttpClientModule } from '@angular/common/http';
 import { ReferenceService } from './service/reference.service';
 import { HttpReferenceService } from './service/http-reference.service';
+import { ErrorComponent } from './route/error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LegalComponent
+    LegalComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FontAwesomeModule,
     AppRoutingModule,
     LayoutModule,
     ReferenceCreateModule
