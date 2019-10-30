@@ -5,8 +5,11 @@ div.row.header {
 
 .row {
   display: grid;
-  grid-template-columns: 5em 5em 5em 5em;
-  padding: 0.5em;
+  grid-template-columns: 25% 30% 25% 20%;
+  padding: 0.5em 0;
+  >div {
+    padding: 0 0.5em;
+  }
 }
 
 .content {

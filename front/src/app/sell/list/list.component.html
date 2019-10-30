@@ -2,10 +2,10 @@
   <h1>Liste des références</h1>
   <div class="table">
     <div class="row header">
-      <div>Label</div>
-      <div>Category</div>
-      <div>Quantity</div>
-      <div>Price</div>
+      <div>Libellé</div>
+      <div>Categorie</div>
+      <div>Quantité</div>
+      <div>Prix</div>
     </div>
     <div class="row content" *ngFor="let ref of reference.getStockAsArray()" routerLink="/reference/1">
       <div>{{ref.label}}</div>
