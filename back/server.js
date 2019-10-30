@@ -1,7 +1,7 @@
 const express = require('express');
 const serveIndex = require('serve-index');
 const cors = require('cors');
-const fs = require('fs');
+const fs = require('fs').promises;
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/lavalstore', {
@@ -31,7 +31,7 @@ app.get('/ws/reference', (req, res, next) => {
 app.post('/ws/reference', async (req, res, next) => {
     try {
         references.push(req.body);
-        fs.writeFileSync('references.json', JSON.stringify(references));
+        await fs.writeFile('references.json', JSON.stringify(references));
 
         try {
             const ref = new Reference(req.body);
