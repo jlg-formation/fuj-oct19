@@ -46,4 +46,8 @@ export class ReferenceService {
   hasStock() {
     return Object.values(this.stock).length > 0;
   }
+
+  getStockAsArray() {
+    return Object.values(this.stock);
+  }
 }

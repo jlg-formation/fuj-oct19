@@ -1,0 +1,22 @@
+div.row.header {
+  font-weight: bold;
+  background: #ddd;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 5em 5em 5em 5em;
+  padding: 0.5em;
+}
+
+.content {
+  cursor: pointer;
+
+  &:nth-child(odd) {
+    background: #eee;
+  }
+
+  &:hover {
+    background: #ccc;
+  }
+}
