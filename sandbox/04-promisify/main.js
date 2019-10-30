@@ -20,10 +20,10 @@ const promisify = asyncFn =>
     (...args) =>
         new Promise((resolve, reject) => {
             asyncFn(...args, (err, ...results) => {
-                if (err) {
-                    reject(err);
-                    return;
-                }
+                if (err)
+                    return reject(err);
+
+
                 resolve(...results);
             });
         });
