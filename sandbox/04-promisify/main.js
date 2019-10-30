@@ -10,14 +10,14 @@ function coucouSlow(str, callback) {
             err = 'str is undefined';
         }
         callback(err, `coucou ${str}`);
-    }, 2000);
+    }, 500);
 }
 
 
 
 
-function promisify(asyncFn) {
-    const promise = function(...args) {
+const promisify = asyncFn =>
+    (...args) => {
         return new Promise((resolve, reject) => {
             asyncFn(...args, (err, ...results) => {
                 if (err) {
@@ -27,9 +27,7 @@ function promisify(asyncFn) {
                 resolve(...results);
             });
         });
-    }
-    return promise;
-}
+    };
 
 const coucouSlowPromise = promisify(coucouSlow);
 
