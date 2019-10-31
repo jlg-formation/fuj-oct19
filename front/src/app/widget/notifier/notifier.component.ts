@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { ReferenceService } from 'src/app/service/reference.service';
 
 @Component({
   selector: 'app-notifier',
@@ -9,18 +10,12 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 export class NotifierComponent implements OnInit {
 
   @Input() host: string;
-  subject$: WebSocketSubject<any>;
   message = '';
 
-  constructor() { }
+  constructor(private reference: ReferenceService) { }
 
   ngOnInit() {
-    console.log('this.host: ', this.host);
-    this.subject$ = webSocket({
-      url: 'ws://localhost:3000',
-      deserializer: msg => msg
-    });
-    this.subject$.subscribe(
+    this.reference.notifier$.subscribe(
       msg => {
         console.log('message received: ', msg);
         this.message = msg.data;
@@ -28,6 +23,7 @@ export class NotifierComponent implements OnInit {
       err => console.log(err),
       () => console.log('complete')
     );
+
   }
 
 }

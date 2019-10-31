@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+
 
 import { ReferenceService } from './reference.service';
 import { Stock } from '../interface/stock';
@@ -14,6 +16,11 @@ export class HttpReferenceService extends ReferenceService {
   constructor(private http: HttpClient, private router: Router) {
     super();
     this.getStockFromServer();
+    this.notifier$ = webSocket({
+      url: 'ws://localhost:3000',
+      deserializer: msg => msg
+    });
+
   }
 
   async add(ref: Reference) {

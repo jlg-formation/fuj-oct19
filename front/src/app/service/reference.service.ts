@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Reference } from '../interface/reference';
 import { Stock } from '../interface/stock';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class ReferenceService {
 
   ref = this.getCurrentRef();
   stock = this.getStock();
+  notifier$ = new Observable<any>(observer => {});
 
   constructor() { }
 
