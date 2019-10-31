@@ -11,9 +11,12 @@ export class TimerComponent implements OnInit {
 
   @Output() finished = new EventEmitter<{ msg: string }>();
 
+  counter: number;
+
   constructor() { }
 
   ngOnInit() {
+    this.counter = this.duration;
   }
 
 }
