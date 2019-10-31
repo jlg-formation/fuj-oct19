@@ -73,7 +73,8 @@ const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
 
-wss.on('connection', (ws) => {
+wss.on('connection', async (ws) => {
+    console.log('new ws connection');
 
     //connection is up, let's add a simple simple event
     ws.on('message', message => {
@@ -86,7 +87,10 @@ wss.on('connection', (ws) => {
     });
 
     //send immediatly a feedback to the incoming connection    
-    ws.send('Hi there, I am a WebSocket server');
+    ws.send('hello');
+    await sleep(5000);
+    ws.send('comment allez vous ?');
+
 });
 
 server.listen(port, () => {
