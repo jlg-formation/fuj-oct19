@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { interval } from 'rxjs';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { interval, Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 
 @Component({
@@ -13,22 +13,25 @@ export class TimerComponent implements OnInit {
 
   @Output() finished = new EventEmitter<{ msg: string }>();
 
-  counter: number;
+  counter$: Observable<number>;
 
   constructor() { }
 
   ngOnInit() {
-    this.counter = this.duration;
-
-    interval(1000).pipe(
+    this.counter$ = interval(1000).pipe(
       map(x => x + 1),
       startWith(0),
       take(this.duration + 1),
       map(x => this.duration - x),
-    ).subscribe({
-      next: data => this.counter = data,
-      complete: () => this.finished.emit({ msg: 'Tu bosses pas tres vite...' })
-    });
+      map(x => {
+        if (x === 0) {
+          this.finished.emit({msg: 'Tu bosses pas vite...'})
+        }
+        console.log('x', x);
+        return x;
+      }),
+    );
+
   }
 
 }

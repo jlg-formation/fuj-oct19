@@ -5,6 +5,9 @@ const fs = require('fs').promises;
 const mongoose = require('mongoose');
 const Reference = require('./model/Reference');
 
+const http = require('http');
+const WebSocket = require('ws');
+
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
 
 mongoose.set('useCreateIndex', true);
@@ -65,5 +68,27 @@ app.put('/ws/reference/:id', async (req, res, next) => {
 app.use(express.static('.'));
 app.use(serveIndex('.', { icons: true }));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
+const server = http.createServer(app);
+
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+
+    //connection is up, let's add a simple simple event
+    ws.on('message', message => {
+
+        //log the received message and send it back to the client
+        console.log('received: %s', message);
+        ws.send(`Hello, you sent -> ${message}`);
+
+        
+    });
+
+    //send immediatly a feedback to the incoming connection    
+    ws.send('Hi there, I am a WebSocket server');
+});
+
+server.listen(port, () => {
+    console.log(`Server started on port ${server.address().port} :)`);
+});
