@@ -25,7 +25,7 @@ export class TimerComponent implements OnInit {
       map(x => this.duration - x),
       map(x => {
         if (x === 0) {
-          this.finished.emit({msg: 'Tu bosses pas vite...'})
+          this.finished.emit({msg: 'Tu bosses pas vite...'});
         }
         console.log('x', x);
         return x;
