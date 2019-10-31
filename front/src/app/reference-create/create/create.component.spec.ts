@@ -26,4 +26,9 @@ describe('CreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should test submit without crashing', () => {
+    component.submit();
+    expect(component).toBeTruthy();
+  });
 });
