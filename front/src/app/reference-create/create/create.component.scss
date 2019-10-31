@@ -1,3 +1,13 @@
+main {
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
+
+  app-timer {
+    align-self: flex-end;
+  }
+}
+
 .buttons {
   display: flex;
   justify-content: space-between;

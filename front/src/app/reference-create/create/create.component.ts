@@ -36,4 +36,8 @@ export class CreateComponent implements OnInit {
     }
   }
 
+  warnUser(event: { msg: string }) {
+    alert('Timeout !' + event.msg);
+  }
+
 }
