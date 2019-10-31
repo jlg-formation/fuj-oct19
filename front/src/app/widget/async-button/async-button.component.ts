@@ -27,6 +27,10 @@ export class AsyncButtonComponent implements OnInit, AfterContentInit, AfterView
   ngAfterContentInit(): void {
     console.log('button: ', this.button);
 
+    if (!this.button) {
+      console.error('button not found in light DOM');
+      return;
+    }
     const btn = (this.button.nativeElement as HTMLElement);
     btn.addEventListener('click', evt => {
       console.log('evt: ', evt);

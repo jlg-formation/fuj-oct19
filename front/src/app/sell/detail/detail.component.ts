@@ -27,6 +27,9 @@ export class DetailComponent implements OnInit {
     this.route.params.subscribe(async params => {
       await this.reference.refresh();
       this.ref = this.reference.stock[params.label];
+      if (!this.ref) {
+        return;
+      }
       this.currentQty = +this.ref.quantity;
       this.reference.setCurrentRef(this.ref);
     });

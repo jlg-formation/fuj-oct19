@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrorComponent } from './error.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('ErrorComponent', () => {
   let component: ErrorComponent;
@@ -8,6 +9,7 @@ describe('ErrorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [FontAwesomeModule],
       declarations: [ ErrorComponent ]
     })
     .compileComponents();
