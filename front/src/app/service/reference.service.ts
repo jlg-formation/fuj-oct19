@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Reference } from '../interface/reference';
 import { Stock } from '../interface/stock';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class ReferenceService {
 
   ref = this.getCurrentRef();
   stock = this.getStock();
-  notifier$ = new Observable<any>(observer => {});
+  notifier$ = new Observable<any>(observer => { });
 
   constructor() { }
 
@@ -53,8 +53,13 @@ export class ReferenceService {
     return Object.values(this.stock).length > 0;
   }
 
-  getStockAsArray() {
-    return Object.values(this.stock);
+  getStockAsArray(): Observable<Reference[]> {
+    const result = new BehaviorSubject<Reference[]>(Object.values(this.stock));
+    this.notifier$.subscribe(async data => {
+      await this.refresh();
+      result.next(Object.values(this.stock));
+    });
+    return result;
   }
 
   async deliver(qty: number) {
