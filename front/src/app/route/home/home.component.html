@@ -1,4 +1,5 @@
 <main>
+  <app-notifier host="ws://localhost:3000"></app-notifier>
   <button class="primary" routerLink="/reference/creer">Entrer une nouvelle référence</button>
   <button [disabled]="!reference.hasStock()" routerLink="/references">Faire une vente</button>
   <button disabled>Faire un inventaire</button>

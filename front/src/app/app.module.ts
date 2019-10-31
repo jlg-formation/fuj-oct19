@@ -13,6 +13,7 @@ import { ReferenceService } from './service/reference.service';
 import { HttpReferenceService } from './service/http-reference.service';
 import { ErrorComponent } from './route/error/error.component';
 import { SellModule } from './sell/sell.module';
+import { WidgetModule } from './widget/widget.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SellModule } from './sell/sell.module';
     FontAwesomeModule,
     AppRoutingModule,
     LayoutModule,
+    WidgetModule,
     ReferenceCreateModule,
     SellModule
   ],
