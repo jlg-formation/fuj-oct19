@@ -3,10 +3,10 @@ const serveIndex = require('serve-index');
 const cors = require('cors');
 const fs = require('fs').promises;
 const mongoose = require('mongoose');
-const Reference = require('./model/Reference');
-
 const http = require('http');
 const WebSocket = require('ws');
+
+const Reference = require('./model/Reference');
 
 const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -19,6 +19,9 @@ mongoose.connect('mongodb://localhost:27017/lavalstore', {
 
 const app = express();
 const port = 3000;
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
 app.use(cors());
 app.use(express.json());
@@ -42,6 +45,7 @@ app.post('/ws/reference', async (req, res, next) => {
         const ref = new Reference(req.body);
         await ref.save();
         res.status(204).end();
+        notify();
     } catch (err) {
         res.status(400).json(err);
     }
@@ -60,6 +64,7 @@ app.put('/ws/reference/:id', async (req, res, next) => {
             overwrite: true
         });
         res.status(204).end();
+        notify();
     } catch (err) {
         res.status(400).json(err);
     }
@@ -69,9 +74,7 @@ app.use(express.static('.'));
 app.use(serveIndex('.', { icons: true }));
 
 
-const server = http.createServer(app);
 
-const wss = new WebSocket.Server({ server });
 
 wss.on('connection', async (ws) => {
     console.log('new ws connection');
@@ -83,7 +86,7 @@ wss.on('connection', async (ws) => {
         console.log('received: %s', message);
         ws.send(`Hello, you sent -> ${message}`);
 
-        
+
     });
 
     //send immediatly a feedback to the incoming connection    
@@ -96,3 +99,11 @@ wss.on('connection', async (ws) => {
 server.listen(port, () => {
     console.log(`Server started on port ${server.address().port} :)`);
 });
+
+function notify() {
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send('refresh requested...');
+        }
+    });
+}
